@@ -1,0 +1,3 @@
+--TODO add here the db initial configuration
+--AKA the CREATE TABLE, foreign keys and etc.
+--Basically do the same as in BD with Onda and get the db configuration text file from there
