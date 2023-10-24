@@ -10,9 +10,9 @@ services:
       POSTGRES_PASSWORD: My01pass # The PostgreSQL password (useful to connect to the database)
       POSTGRES_DB: ownersandpets # The PostgreSQL default database (automatically created at first launch)
   
-  #added volume part for database
-  volumes:
-    - ./init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
+    #added volume part for database
+    volumes:
+      - ./init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
   
   command-line:
     build:

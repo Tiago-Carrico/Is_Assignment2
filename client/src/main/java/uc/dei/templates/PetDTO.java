@@ -1,4 +1,6 @@
-package main.java.uc.dei.templates;
+package uc.dei.templates;
+
+import java.time.LocalDate;
 
 public class PetDTO {
 
@@ -8,7 +10,7 @@ public class PetDTO {
     private float weight;
     private Owner owner;
 
-    public Pet(String name, String species, LocalDate birthDate, float weight, Owner owner){
+    public void Pet(String name, String species, LocalDate birthDate, float weight, Owner owner){
         this.name = name;
         this.species = species;
         this.birthDate = birthDate;

@@ -1,2 +1,9 @@
 # Is_Assignment2
  
+### Setting up Server
+- Build Docker Image using "Dockerfile" (if using VsCode, with Docker extension, right click and click "Build")
+- Docker Compose Up using docker-compose.yml (if using VsCode, with Docker extension, right click and click "Compose Up")
+
+
+### Fixes for possible issues
+- If dependencies are not working, try to open VsCode command pallete (Ctrl + Shift + P) and run the command "Java: Clean the Java language Workspace" by "Restart and Delete" when given the prompt

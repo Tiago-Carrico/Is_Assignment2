@@ -1,4 +1,6 @@
-package main.java.uc.dei.templates;
+package uc.dei.templates;
+
+import java.util.ArrayList;
 
 /**
  * Used for Data Transfer (DT) from the server to the client
@@ -7,9 +9,9 @@ public class OwnerDTO {
     
     private String name;
     private int phone;
-    private Arraylist<Pet> pets;
+    private ArrayList<Pet> pets;
 
-    public Owner( String name, int phone){
+    public void Owner( String name, int phone){
         this.name = name;
         this.phone = phone;
         pets = new ArrayList<Pet>();

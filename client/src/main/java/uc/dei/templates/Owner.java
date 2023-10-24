@@ -1,11 +1,13 @@
-package main.java.uc.dei.templates;
+package uc.dei.templates;
+
+import java.util.ArrayList;
 
 public class Owner {
     
     private int id;
     private String name;
     private int phone;
-    private Arraylist<Pet> pets;
+    private ArrayList<Pet> pets;
 
     public Owner(int id, String name, int phone){
         this.id = id;
