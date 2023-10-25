@@ -4,14 +4,14 @@ import java.time.LocalDate;
 
 public class Pet {
     
-    private int id;
+    private Long id;
     private String name;
     private String species;
     private LocalDate birthDate;
     private float weight;
     private Owner owner;
 
-    public Pet(int id, String name, String species, LocalDate birthDate, float weight, Owner owner){
+    public Pet(Long id, String name, String species, LocalDate birthDate, float weight, Owner owner){
         this.id = id;
         this.name = name;
         this.species = species;
@@ -20,11 +20,11 @@ public class Pet {
         this.owner = owner;
     }
 
-	public int getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

@@ -3,7 +3,7 @@
 --Basically do the same as in BD with Onda and get the db configuration text file from there
 
 CREATE TABLE pet (
-	id	 INTEGER,
+	id	 SERIAL,
 	name	 TEXT NOT NULL,
 	species		TEXT NOT NULL,
 	birthdate DATE NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE pet (
 );
 
 CREATE TABLE owner (
-	id	 INTEGER,
+	id	 SERIAL,
 	name	 TEXT NOT NULL,
 	phone INTEGER NOT NULL,
 	PRIMARY KEY(id)

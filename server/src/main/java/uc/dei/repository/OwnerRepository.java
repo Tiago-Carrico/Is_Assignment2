@@ -1,5 +1,9 @@
 package uc.dei.repository;
 
-public class OwnerRepository {
+import org.springframework.data.r2dbc.repository.R2dbcRepository;
+
+import uc.dei.entity.Owner;
+
+public interface OwnerRepository extends R2dbcRepository<Owner, Long>{
     
 }

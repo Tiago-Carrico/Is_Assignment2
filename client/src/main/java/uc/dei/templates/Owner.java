@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class Owner {
     
-    private int id;
+    private Long id;
     private String name;
     private int phone;
-    private ArrayList<Pet> pets;
+    private ArrayList<Pet> pets;    //TODO should we really keep it like this? doesnt match up with SQL standard way of doing it I think
 
-    public Owner(int id, String name, int phone){
+    public Owner(Long id, String name, int phone){
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -17,11 +17,11 @@ public class Owner {
     }
 
 
-	public int getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
