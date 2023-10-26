@@ -16,7 +16,7 @@ public class OwnerService {
     private OwnerRepository ownerRep;
 
     //add new Owner or update it if it already exists (by ID)
-    public Mono<Owner> saveOwner(Owner owner){
+    public Mono<Owner> addOwner(Owner owner){
         return ownerRep.save(owner);
     }
 

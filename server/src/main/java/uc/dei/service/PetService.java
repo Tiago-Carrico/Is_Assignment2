@@ -7,7 +7,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import uc.dei.repository.PetRepository;
-import uc.dei.entity.Owner;
 import uc.dei.entity.Pet;
 
 @Service
@@ -17,7 +16,7 @@ public class PetService {
     private PetRepository petRep;
 
     //add new Pet or update it if it already exists (by ID)
-    public Mono<Pet> savePet(Pet pet){
+    public Mono<Pet> addPet(Pet pet){
         return petRep.save(pet);
     }
 
