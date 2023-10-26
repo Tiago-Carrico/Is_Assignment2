@@ -8,14 +8,14 @@ public class PetDTO {
     private String species;
     private LocalDate birthDate;
     private float weight;
-    private Owner owner;
+    private Long ownerId;
 
-    public void Pet(String name, String species, LocalDate birthDate, float weight, Owner owner){
+    public void Pet(String name, String species, LocalDate birthDate, float weight, Long ownerId){
         this.name = name;
         this.species = species;
         this.birthDate = birthDate;
         this.weight = weight;
-        this.owner = owner;
+        this.ownerId = ownerId;
     }
 
 	public String getName() {
@@ -42,11 +42,11 @@ public class PetDTO {
 		this.weight = weight;
 	}
 
-    public Owner getOwner(){
-        return owner;
+    public Long getOwnerId(){
+        return ownerId;
     }
 
-    public void setOwner(Owner owner){
-        this.owner = owner;
+    public void setOwner(Long ownerId){
+        this.ownerId = ownerId;
     }
 }

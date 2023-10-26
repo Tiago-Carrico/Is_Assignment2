@@ -10,6 +10,7 @@
 - Log in the postgres terminal in Docker:
   - su - postgres
   - psql
+  - \c ownersandpets    (importante senao nao se ve as relações/base de dados)
 
 
 

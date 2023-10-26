@@ -9,15 +9,15 @@ public class Pet {
     private String species;
     private LocalDate birthDate;
     private float weight;
-    private Owner owner;
+    private Long ownerId;
 
-    public Pet(Long id, String name, String species, LocalDate birthDate, float weight, Owner owner){
+    public Pet(Long id, String name, String species, LocalDate birthDate, float weight, Long ownerId){
         this.id = id;
         this.name = name;
         this.species = species;
         this.birthDate = birthDate;
         this.weight = weight;
-        this.owner = owner;
+        this.ownerId = ownerId;
     }
 
 	public Long getId() {
@@ -52,12 +52,12 @@ public class Pet {
 		this.weight = weight;
 	}
 
-    public Owner getOwner(){
-        return owner;
+    public Long getOwnerId(){
+        return ownerId;
     }
 
-    public void setOwner(Owner owner){
-        this.owner = owner;
+    public void setOwner(Long ownerId){
+        this.ownerId = ownerId;
     }
 
 }

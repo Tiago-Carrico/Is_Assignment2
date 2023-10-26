@@ -23,8 +23,8 @@ public class Pet {
     @Column("weight")
     private float weight;
 
-    @Column("owner_id")//TODO also subject to not being like this? seems weird when by default it asks for one owner but what is kept is the owner ID 
-    private Owner owner;
+    @Column("owner_id")
+    private Long ownerId;
 
     public Long getId() {
 		return this.id;
@@ -57,5 +57,13 @@ public class Pet {
 	public void setWeight(float weight) {
 		this.weight = weight;
 	}
+
+	public Long getOwnerId(){
+        return ownerId;
+    }
+
+    public void setOwner(Long ownerId){
+        this.ownerId = ownerId;
+    }
 
 }
