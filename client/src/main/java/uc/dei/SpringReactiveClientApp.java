@@ -49,12 +49,15 @@ public class SpringReactiveClientApp {
 
     public static void main(String[] args){
         ReactiveClientServ wc = new ReactiveClientServImpl();
+        addOwner(wc);
     }
 
 
     //These are for testing only, do all definite functions above
     public static void addOwner(ReactiveClientServ wc){
+        System.out.println("trying to post it");
         Owner testDummy = new Owner(Long.valueOf(1), "tiago", 987654321);
         wc.postOwner(testDummy);
+        System.out.println("posted it, tried at least lmao");
     }
 }

@@ -16,7 +16,7 @@ public class PetService {
     private PetRepository petRep;
 
     //add new Pet or update it if it already exists (by ID)
-    public Mono<Pet> addPet(Pet pet){
+    public Mono<Pet> savePet(Pet pet){
         return petRep.save(pet);
     }
 

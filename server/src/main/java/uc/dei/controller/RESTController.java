@@ -32,12 +32,13 @@ public class RESTController {
     @Autowired
     private PetService petService;
 
-    //private Logger logger = LoggerFactory.getLogger(RESTController.class);
+    private Logger logger = LoggerFactory.getLogger(RESTController.class);
 
     //Request for saving new owner od DB -> POST /api/owner
     @PostMapping(value = "owner", consumes = {MediaType.APPLICATION_JSON_VALUE})
     public Mono<Owner> addOwner(@RequestBody Owner owner){
-        //logger.info("Request: POST | /api/owner");
+        System.out.println("it shows something here?");
+        logger.info("Request: POST | /api/owner");
         return ownerService.saveOwner(owner);
     }
     

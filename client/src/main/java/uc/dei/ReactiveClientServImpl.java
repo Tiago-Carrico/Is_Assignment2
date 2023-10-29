@@ -19,7 +19,7 @@ public class ReactiveClientServImpl implements ReactiveClientServ{
     private WebClient wc;
 
     public ReactiveClientServImpl(){
-        this.wc = WebClient .builder()
+        this.wc = WebClient.builder()
                             .baseUrl("http://localhost:8080/api")
                             .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                             .build();
@@ -29,11 +29,12 @@ public class ReactiveClientServImpl implements ReactiveClientServ{
     //test functions, put all definite ones above
     @Override
     public void postOwner(Owner owner){
-        wc  .post()
+        wc.post()
             .uri("/owner")
             .body(Mono.just(new OwnerDTO(owner)), OwnerDTO.class)
             .retrieve()
             .bodyToMono(String.class)
+            .log()
             .subscribe();
     }
 }
