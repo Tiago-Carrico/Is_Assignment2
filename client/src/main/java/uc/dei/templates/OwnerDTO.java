@@ -1,7 +1,5 @@
 package uc.dei.templates;
 
-import java.util.ArrayList;
-
 /**
  * Used for Data Transfer (DT) from the server to the client
  */
@@ -9,12 +7,12 @@ public class OwnerDTO {
     
     private String name;
     private int phone;
-    private ArrayList<Pet> pets;
 
-    public void Owner( String name, int phone){
-        this.name = name;
-        this.phone = phone;
-        pets = new ArrayList<Pet>();
+    public OwnerDTO(){}
+
+    public OwnerDTO(Owner owner){
+        this.name = owner.getName();
+        this.phone = owner.getPhone();
     }
 
 	public String getName() {
@@ -33,15 +31,8 @@ public class OwnerDTO {
 		this.phone = phone;
 	}
 
-    public ArrayList<Pet> getPets(){
-        return pets;
-    }
-
-    public void setPets(ArrayList<Pet> petList){
-        this.pets = petList;
-    }
-
-    public void addPet(Pet newPet){
-        this.pets.add(newPet);
-    }
+	@Override
+	public String toString(){
+		return "Owner: name-> " + name + " phone number-> " + phone;
+	}
 }

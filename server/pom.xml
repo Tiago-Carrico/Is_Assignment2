@@ -69,6 +69,14 @@
 			<scope>test</scope>
       <version>3.5.11</version>
 		</dependency>
+
+    <!--after problems running the server-->
+    <dependency>
+	    <groupId>org.springframework.data</groupId>
+	    <artifactId>spring-data-r2dbc</artifactId>
+	    <version>3.0.1</version>
+    </dependency>
+    
   </dependencies>
 
   <build>

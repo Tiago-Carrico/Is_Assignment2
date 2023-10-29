@@ -1,5 +1,21 @@
 package uc.dei;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+import reactor.core.publisher.Flux;
+import reactor.core.scheduler.Scheduler;
+import reactor.core.scheduler.Schedulers;
+
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+
+import uc.dei.templates.Owner;
+import uc.dei.templates.Pet;
+
 //TODO actually call all the functions the project requires, populate database if not in init_db.sql, write on stuff if needed, etc.
 
 /*
@@ -30,4 +46,15 @@ package uc.dei;
  */
 public class SpringReactiveClientApp {
     
+
+    public static void main(String[] args){
+        ReactiveClientServ wc = new ReactiveClientServImpl();
+    }
+
+
+    //These are for testing only, do all definite functions above
+    public static void addOwner(ReactiveClientServ wc){
+        Owner testDummy = new Owner(Long.valueOf(1), "tiago", 987654321);
+        wc.postOwner(testDummy);
+    }
 }
