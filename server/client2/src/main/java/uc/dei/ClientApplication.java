@@ -46,7 +46,7 @@ import uc.dei.templates.Pet;
  *  - use .log() on flux for more info
  * 
  */
-public class SpringReactiveClientApp {
+public class ClientApplication {
     
 
     public static void main(String[] args){
@@ -59,18 +59,11 @@ public class SpringReactiveClientApp {
                                     .uri("/getOwner")
                                     .accept(MediaType.APPLICATION_JSON)
                                     .retrieve()
-                                    .bodyToMono(String.class)
-                                    .log();
+                                    .bodyToMono(String.class);
                                     
         response.subscribe(result -> {
             System.out.println("Response: " + result);
         });
-        
-        try{
-            Thread.sleep(10000);
-        }catch (InterruptedException e) {
-            e.printStackTrace();
-        };
         
 
         System.out.println("after");
@@ -82,7 +75,11 @@ public class SpringReactiveClientApp {
         System.out.println("trying to post it");
         Owner testDummy = new Owner(Long.valueOf(3), "tiago", 98765);
         wc.postOwner(testDummy);
-        
+        try{
+            Thread.sleep(100);
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         
         System.out.println("posted it, tried at least lmao");
     }

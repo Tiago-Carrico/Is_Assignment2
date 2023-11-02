@@ -37,7 +37,4 @@ public class ReactiveClientServImpl implements ReactiveClientServ{
             .log()
             .subscribe();
     }
-
-    
-    
 }
