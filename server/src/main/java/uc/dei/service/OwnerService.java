@@ -1,10 +1,12 @@
-package uc.dei;
+package uc.dei.service;
+import uc.dei.repository.OwnerRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import uc.dei.entity.Owner;
 
 @Service
 public class OwnerService {

@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.r2dbc.config.EnableR2dbcAuditing;
 
 @SpringBootApplication
-@EntityScan("uc.dei.*")
 @EnableR2dbcAuditing
 public class ServerApplication {
 

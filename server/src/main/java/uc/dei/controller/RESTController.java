@@ -1,4 +1,4 @@
-package uc.dei;
+package uc.dei.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import uc.dei.entity.Owner;
+import uc.dei.service.OwnerService;
+import uc.dei.service.PetService;
 
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;

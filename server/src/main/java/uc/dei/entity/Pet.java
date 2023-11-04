@@ -1,4 +1,4 @@
-package uc.dei;
+package uc.dei.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
