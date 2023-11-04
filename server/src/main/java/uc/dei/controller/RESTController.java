@@ -17,6 +17,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import uc.dei.entity.Owner;
 import uc.dei.service.OwnerService;
+import uc.dei.entity.Pet;
 import uc.dei.service.PetService;
 
 import org.slf4j.LoggerFactory;
@@ -33,11 +34,12 @@ public class RESTController {
 
     private Logger logger = LoggerFactory.getLogger(RESTController.class);
 
-    @GetMapping("/getOwner")
-    public Mono<Owner> getOwner(){
-        System.out.println("it shows something here?");
-        logger.info("Request: GET | /api/owner/1");
-        return ownerService.getOwnerById((long) 1);
+    //Needed functions
+    //GET /api/owner -> returns all owners
+    @GetMapping("/owner")
+    public Flux<Owner> getAllOwners(){
+        logger.info("Request type: GET\nRequest URI: /api/owner");
+        return ownerService.getAllOwners();
     }
 
     // GET /api/owner/{id} -> returns the owner that corresponds with the given ID
@@ -47,11 +49,31 @@ public class RESTController {
         return ownerService.getOwnerById(id);
     }
 
-    @GetMapping("/owner")
-    public Flux<Owner> getAllOwners(){
-        logger.info("Request type: GET\nRequest URI: /api/owner");
-        return ownerService.getAllOwners();
+    //GET /api/pet -> returns all pets
+    @GetMapping("/pet")
+    public Flux<Pet> getAllPets(){
+        logger.info("Request type: GET\nRequest URI: /api/pet");
+        return petService.getAllPets();
     }
+
+    // GET /api/pet/{id} -> returns the pet that corresponds with the given ID
+    @GetMapping("/pet/{id}")
+    public Mono<Pet> getPet(@PathVariable("id") Long id) {
+        logger.info("Request type: GET\nRequest URI: /api/pet" + id + "]");
+        return petService.getPetById(id);
+    }
+
+
+
+    //Test functions
+    @GetMapping("/getOwner")
+    public Mono<Owner> getOwner(){
+        System.out.println("it shows something here?");
+        logger.info("Request: GET | /api/owner/1");
+        return ownerService.getOwnerById((long) 1);
+    }
+
+
 
 
     //Test

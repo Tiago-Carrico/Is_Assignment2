@@ -30,10 +30,13 @@ public class SpringReactiveClientApp {
         //TODO insert all the project features here after making the functions below
         //#1 - Show names and telephones of all Owners
             //-> simple GET
+        System.out.println("//////////////////EX1//////////");
         getOwners(wc);
 
         //#2 - number of Pets
             //-> simple count/size of Flux returned
+        System.out.println("/////////////////EX2////////////");
+        getNumberPets(wc);
 
 
         //#3 - Total number of dogs
@@ -84,6 +87,19 @@ public class SpringReactiveClientApp {
             .subscribe(owner -> {
                 System.out.println(owner.toString());
             });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void getNumberPets(ReactiveClientServ wc){
+        wc.getAllPets()
+           .count()
+           .subscribe(count->{
+            System.out.println(count);
+           }); 
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e){
