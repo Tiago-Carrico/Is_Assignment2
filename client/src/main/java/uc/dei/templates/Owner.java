@@ -8,6 +8,8 @@ public class Owner {
     private String name;
     private int phone;
 
+	public Owner(){}
+
     public Owner(Long id, String name, int phone){
         this.id = id;
         this.name = name;
@@ -36,6 +38,10 @@ public class Owner {
 
 	public void setPhone(int phone) {
 		this.phone = phone;
+	}
+
+	public String toString(){
+		return "name: " + name + "\nphone: " + phone;
 	}
 
 }

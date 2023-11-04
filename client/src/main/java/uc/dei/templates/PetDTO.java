@@ -10,7 +10,9 @@ public class PetDTO {
     private float weight;
     private Long ownerId;
 
-    public void Pet(String name, String species, LocalDate birthDate, float weight, Long ownerId){
+    public PetDTO(){}
+
+    public void PetDTO(String name, String species, LocalDate birthDate, float weight, Long ownerId){
         this.name = name;
         this.species = species;
         this.birthDate = birthDate;

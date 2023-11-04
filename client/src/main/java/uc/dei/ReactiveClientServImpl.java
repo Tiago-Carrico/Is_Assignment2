@@ -25,6 +25,44 @@ public class ReactiveClientServImpl implements ReactiveClientServ{
                             .build();
     }
 
+    @Override
+    public Flux<Owner> getAllOwners(){
+        return wc   .get()
+                    .uri("/owner")
+                    .retrieve()
+                    .bodyToFlux(Owner.class);
+    }
+
+    @Override
+    public Mono<Owner> getOwner(long id){
+        return wc   .get()
+                    .uri(uriBuilder -> {
+                        return uriBuilder   .path("/owner/{id}")
+                                            .build(id);
+                    })
+                    .retrieve()
+                    .bodyToMono(Owner.class);
+    }
+
+    @Override
+    public Flux<Pet> getAllPets(){
+        return wc   .get()
+                    .uri("/pet")
+                    .retrieve()
+                    .bodyToFlux(Pet.class);
+    }
+
+    @Override
+    public Mono<Pet> getPet(long id){
+        return wc   .get()
+                    .uri(uriBuilder -> {
+                        return uriBuilder   .path("/pet/{id}")
+                                            .build(id);
+                    })
+                    .retrieve()
+                    .bodyToMono(Pet.class);
+    }
+
 
     //test functions, put all definite ones above
     @Override
@@ -37,7 +75,6 @@ public class ReactiveClientServImpl implements ReactiveClientServ{
             .log()
             .subscribe();
     }
-
     
     
 }

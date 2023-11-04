@@ -11,6 +11,8 @@ public class Pet {
     private float weight;
     private Long ownerId;
 
+	public Pet(){}
+
     public Pet(Long id, String name, String species, LocalDate birthDate, float weight, Long ownerId){
         this.id = id;
         this.name = name;
@@ -59,5 +61,10 @@ public class Pet {
     public void setOwner(Long ownerId){
         this.ownerId = ownerId;
     }
+
+	//TODO dont know if after we'll need to also print the owner according to the ownerId but thats a concern for later
+	public String toString(){
+		return "Pet\nname: " + name + "\nspecies: " + species + "\nbirth date: " + birthDate + "\nweight: " + weight;
+	}
 
 }
