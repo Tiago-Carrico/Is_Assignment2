@@ -2,6 +2,7 @@ package uc.dei;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Scheduler;
@@ -137,7 +138,13 @@ public class SpringReactiveClientApp {
     public static void weightAverageStdDeviation(ReactiveClientServ wc){
         System.out.println("/////////////////EX5////////////");
         wc.getAllPets()
-            .reduce()
+            .map(list ->{
+                float avg=0;
+                for(Pet p: list){
+                    avg+=p.getWeight();
+                }
+                //return avg/list.size();
+            })
     }
 
     //#6 - Name of the eldest pet
