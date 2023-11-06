@@ -14,6 +14,9 @@ public interface ReactiveClientServ {
     public Flux<Pet> getAllPets();
     public Mono<Pet> getPet(long id);
 
+    //for getting pets by owner
+    public Flux<Pet> getPetsByOwner(long id);
+
 
     //For testing and such, for definite functions make them above
     public void postOwner(Owner owner);

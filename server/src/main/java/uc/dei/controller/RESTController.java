@@ -59,8 +59,14 @@ public class RESTController {
     // GET /api/pet/{id} -> returns the pet that corresponds with the given ID
     @GetMapping("/pet/{id}")
     public Mono<Pet> getPet(@PathVariable("id") Long id) {
-        logger.info("Request type: GET\nRequest URI: /api/pet" + id + "]");
+        logger.info("Request type: GET\nRequest URI: /api/pet/" + id + "]");
         return petService.getPetById(id);
+    }
+
+    @GetMapping("/pet/ownerId/{id}")
+    public Flux<Pet> getPetByOwner(@PathVariable("id") Long id){
+        logger.info("Request type: GET\nRequest URI: /api/pet/ownerId/" + id + "]");
+        return petService.getPetByOwnerId(id);
     }
 
 

@@ -33,4 +33,8 @@ public class PetService {
     public Mono<Void> deletePet(Long id){
         return petRep.deleteById(id);
     }
+
+    public Flux<Pet> getPetByOwnerId(long id){
+        return petRep.findByOwnerId(id);
+    }
 }

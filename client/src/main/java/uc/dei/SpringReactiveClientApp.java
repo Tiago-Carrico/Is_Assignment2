@@ -30,28 +30,43 @@ public class SpringReactiveClientApp {
 
         //TODO insert all the project features here after making the functions below
         //#1
-        getOwners(wc);
+        //getOwners(wc);
 
         //#2
-        getNumberPets(wc);
+        //getNumberPets(wc);
 
         //#3
-        getDogs(wc);
+        //getDogs(wc);
 
         //#4
-        getHeavyPetsByWeight(wc);
+        //getHeavyPetsByWeight(wc);
 
         //#5
-        weightAverageStdDeviation(wc);
+        //weightAverageStdDeviation(wc);
 
         //#6
+        //eldestPet(wc);
 
         //#7
 
         //#8
 
         //#9
+
+
+        test(wc);
         
+    }
+
+
+    public static void test(ReactiveClientServ wc){
+        wc.getPetsByOwner(2)
+        .subscribe(System.out::println);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
     }
 
 
@@ -63,7 +78,7 @@ public class SpringReactiveClientApp {
                 System.out.println(owner.toString());
             });
         try {
-            Thread.sleep(10000);
+            Thread.sleep(1000);
         } catch (InterruptedException e){
             e.printStackTrace();
         }
@@ -78,7 +93,7 @@ public class SpringReactiveClientApp {
                 System.out.println(owner.toString());
             });
         try {
-            Thread.sleep(10000);
+            Thread.sleep(1000);
         } catch (InterruptedException e){
             e.printStackTrace();
         }
@@ -94,7 +109,7 @@ public class SpringReactiveClientApp {
             System.out.println(count);
            }); 
         try {
-            Thread.sleep(10000);
+            Thread.sleep(1000);
         } catch (InterruptedException e){
             e.printStackTrace();
         }
@@ -128,7 +143,7 @@ public class SpringReactiveClientApp {
                 System.out.println(pet);
             });
         try {
-            Thread.sleep(10000);
+            Thread.sleep(1000);
         } catch (InterruptedException e){
             e.printStackTrace();
         }
@@ -136,32 +151,47 @@ public class SpringReactiveClientApp {
 
     //#5 - Average and standard deviations of animal weights
         //-> GET of all animal weights using the size of returned query to divide the sum of weights
-    public static void weightAverageStdDeviation(ReactiveClientServ wc){
+    /*public static void weightAverageStdDeviation(ReactiveClientServ wc){
         System.out.println("/////////////////EX5////////////");
         wc.getAllPets()
-            .map(list ->{
-                //float avg=0;
-                //for(Pet p: list){
-                 //   avg+=p.getWeight();
-                //}
-                //return avg/list.size();
-                System.out.println(list);
-                return 0;
-            });
+           // .collectList()
+            .map(pet -> {
+                System.out.println(pet);
+            })
+            .subscribe(System.out::println);
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e){
             e.printStackTrace();
         }
-    }
+    }*/
 
     //#6 - Name of the eldest pet
         //-> GET oldest pet, return the name
+    public static void eldestPet(ReactiveClientServ wc){
+        System.out.println("/////////////////EX6////////////");
+        wc.getAllPets()
+            .sort((pet1, pet2) -> pet1.getBirthDate().compareTo(pet2.getBirthDate()))
+            .take(1)
+            .subscribe(eldest -> {
+                System.out.println(eldest.getName());
+            });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
 
 
-    //#7 - Average number of Pets per Owner, considering Owners with only one animal
+    //#7 - Average number of Pets per Owner, considering Owners with only more than one animal
         //-> filter owners with only one pet, group pets per owner? TODO check this later
-
+        //
+    public static void avgPetsPerOwner(ReactiveClientServ wc){
+        System.out.println("/////////////////EX7////////////");
+        wc.getAllOwners()
+            .subscribe();
+    }
 
     //#8 - All names of all the Owners and number of their respective Pets, sorted by number of pets (should not use block() if possible)
         //-> GET all owners, and cross each one with another GET of Pets with them as their owner, return the count of that query, and sort Owners by that

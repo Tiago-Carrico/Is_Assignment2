@@ -63,6 +63,17 @@ public class ReactiveClientServImpl implements ReactiveClientServ{
                     .bodyToMono(Pet.class);
     }
 
+    @Override
+    public Flux<Pet> getPetsByOwner(long id){
+        return wc   .get()
+                    .uri(uriBuilder -> {
+                        return uriBuilder   .path("/pet/ownerId/{id}")
+                                            .build(id);
+                    })
+                    .retrieve()
+                    .bodyToFlux(Pet.class);
+    }
+
 
     //test functions, put all definite ones above
     @Override
