@@ -42,6 +42,14 @@ public class Pet {
 		this.name = name;
 	}
 
+	public String getSpecies(){
+		return this.species;
+	}
+
+	public void setSpecies(String species){
+		this.species = species;
+	}
+
 	public LocalDate getBirthDate() {
 		return this.birthDate;
 	}

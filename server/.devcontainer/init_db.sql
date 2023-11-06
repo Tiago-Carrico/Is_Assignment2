@@ -19,10 +19,4 @@ CREATE TABLE owner (
 	PRIMARY KEY(id)
 );
 
-CREATE TABLE test (
-	id SERIAL,
-	name TEXT,
-	PRIMARY KEY(id)
-);
-
 ALTER TABLE pet ADD CONSTRAINT pet_fk1 FOREIGN KEY (owner_id) REFERENCES owner(id);

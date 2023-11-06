@@ -38,6 +38,14 @@ public class Pet {
 		this.name = name;
 	}
 
+	public String getSpecies(){
+		return this.species;
+	}
+
+	public void setSpecies(String species){
+		this.species = species;
+	}
+
 	public LocalDate getBirthDate() {
 		return this.birthDate;
 	}
@@ -64,7 +72,7 @@ public class Pet {
 
 	//TODO dont know if after we'll need to also print the owner according to the ownerId but thats a concern for later
 	public String toString(){
-		return "Pet\nname: " + name + "\nspecies: " + species + "\nbirth date: " + birthDate + "\nweight: " + weight;
+		return "\nname: " + name + "\nspecies: " + species + "\nbirth date: " + birthDate + "\nweight: " + weight + "kg";
 	}
 
 }

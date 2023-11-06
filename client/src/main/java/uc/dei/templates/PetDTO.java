@@ -28,6 +28,14 @@ public class PetDTO {
 		this.name = name;
 	}
 
+    public String getSpecies(){
+        return this.species;
+    }
+
+    public void setSpecies(String species){
+        this.species = species;
+    }
+
 	public LocalDate getBirthDate() {
 		return this.birthDate;
 	}
@@ -51,4 +59,8 @@ public class PetDTO {
     public void setOwner(Long ownerId){
         this.ownerId = ownerId;
     }
+
+    public String toString(){
+		return "Pet\nname: " + name + "\nspecies: " + species + "\nbirth date: " + birthDate + "\nweight: " + weight + "kg";
+	}
 }

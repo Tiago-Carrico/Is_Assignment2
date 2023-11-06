@@ -28,43 +28,28 @@ public class SpringReactiveClientApp {
 
 
         //TODO insert all the project features here after making the functions below
-        //#1 - Show names and telephones of all Owners
-            //-> simple GET
-        System.out.println("//////////////////EX1//////////");
+        //#1
         getOwners(wc);
 
-        //#2 - number of Pets
-            //-> simple count/size of Flux returned
-        System.out.println("/////////////////EX2////////////");
+        //#2
         getNumberPets(wc);
 
+        //#3
+        getDogs(wc);
 
-        //#3 - Total number of dogs
-            //-> simple GET with species=="dog"
+        //#4
+        getHeavyPetsByWeight(wc);
 
+        //#5
 
-        //#4 - Animals weighting more than 10kg, by ascending order of weight
-            //-> GET with ordering
+        //#6
 
+        //#7
 
-        //#5 - Average and standard deviations of animal weights
-            //-> GET of all animal weights using the size of returned query to divide the sum of weights
+        //#8
 
-
-        //#6 - Name of the eldest pet
-            //-> GET oldest pet, return the name
-
-
-        //#7 - Average number of Pets per Owner, considering Owners with only one animal
-            //-> filter owners with only one pet, group pets per owner? TODO check this later
-
-
-        //#8 - All names of all the Owners and number of their respective Pets, sorted by number of pets (should not use block() if possible)
-            //-> GET all owners, and cross each one with another GET of Pets with them as their owner, return the count of that query, and sort Owners by that
-
-
-        //#9 - Same as #8, but instead of printing just the number of Pets, prints a list of all the Pet names. (Most work should occur on the client, aka, client does all the filtering etc.)
-            //-> Same as above but also print all Pets names instead of just count
+        //#9
+        
     }
 
 
@@ -82,7 +67,10 @@ public class SpringReactiveClientApp {
         }
     }
 
+    //#1 - Show names and telephones of all Owners
+        //-> simple GET
     public static void getOwners(ReactiveClientServ wc){
+        System.out.println("//////////////////EX1//////////");
         wc.getAllOwners()
             .subscribe(owner -> {
                 System.out.println(owner.toString());
@@ -94,7 +82,10 @@ public class SpringReactiveClientApp {
         }
     }
 
+    //#2 - number of Pets
+        //-> simple count/size of Flux returned
     public static void getNumberPets(ReactiveClientServ wc){
+        System.out.println("/////////////////EX2////////////");
         wc.getAllPets()
            .count()
            .subscribe(count->{
@@ -106,6 +97,65 @@ public class SpringReactiveClientApp {
             e.printStackTrace();
         }
     }
+
+    //#3 - Total number of dogs
+        //-> simple GET with species=="dog"
+    public static void getDogs(ReactiveClientServ wc){
+        System.out.println("/////////////////EX3////////////");
+        wc.getAllPets()
+            .filter(pet -> pet.getSpecies().equals("dog"))
+            .count()
+            .subscribe(count ->{
+                System.out.println(count);
+            });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+
+    //#4 - Animals weighting more than 10kg, by ascending order of weight
+        //-> GET with ordering
+    public static void getHeavyPetsByWeight(ReactiveClientServ wc){
+        System.out.println("/////////////////EX4////////////");
+        wc.getAllPets()
+            .filter(pet -> pet.getWeight() > 10)
+            .sort((pet1, pet2) -> Float.compare(pet1.getWeight(), pet2.getWeight()))
+            .subscribe(pet -> {
+                System.out.println(pet);
+            });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+
+    //#5 - Average and standard deviations of animal weights
+        //-> GET of all animal weights using the size of returned query to divide the sum of weights
+    public static void weightAverageStdDeviation(ReactiveClientServ wc){
+        System.out.println("/////////////////EX5////////////");
+        wc.getAllPets()
+            .reduce()
+    }
+
+    //#6 - Name of the eldest pet
+        //-> GET oldest pet, return the name
+
+
+    //#7 - Average number of Pets per Owner, considering Owners with only one animal
+        //-> filter owners with only one pet, group pets per owner? TODO check this later
+
+
+    //#8 - All names of all the Owners and number of their respective Pets, sorted by number of pets (should not use block() if possible)
+        //-> GET all owners, and cross each one with another GET of Pets with them as their owner, return the count of that query, and sort Owners by that
+
+
+    //#9 - Same as #8, but instead of printing just the number of Pets, prints a list of all the Pet names. (Most work should occur on the client, aka, client does all the filtering etc.)
+        //-> Same as above but also print all Pets names instead of just count
+
+
 }
 
 
