@@ -42,6 +42,7 @@ public class SpringReactiveClientApp {
         getHeavyPetsByWeight(wc);
 
         //#5
+        weightAverageStdDeviation(wc);
 
         //#6
 
@@ -62,7 +63,7 @@ public class SpringReactiveClientApp {
                 System.out.println(owner.toString());
             });
         try {
-            Thread.sleep(1000);
+            Thread.sleep(10000);
         } catch (InterruptedException e){
             e.printStackTrace();
         }
@@ -77,7 +78,7 @@ public class SpringReactiveClientApp {
                 System.out.println(owner.toString());
             });
         try {
-            Thread.sleep(1000);
+            Thread.sleep(10000);
         } catch (InterruptedException e){
             e.printStackTrace();
         }
@@ -93,7 +94,7 @@ public class SpringReactiveClientApp {
             System.out.println(count);
            }); 
         try {
-            Thread.sleep(1000);
+            Thread.sleep(10000);
         } catch (InterruptedException e){
             e.printStackTrace();
         }
@@ -110,7 +111,7 @@ public class SpringReactiveClientApp {
                 System.out.println(count);
             });
         try {
-            Thread.sleep(1000);
+            Thread.sleep(10000);
         } catch (InterruptedException e){
             e.printStackTrace();
         }
@@ -127,7 +128,7 @@ public class SpringReactiveClientApp {
                 System.out.println(pet);
             });
         try {
-            Thread.sleep(1000);
+            Thread.sleep(10000);
         } catch (InterruptedException e){
             e.printStackTrace();
         }
@@ -139,12 +140,19 @@ public class SpringReactiveClientApp {
         System.out.println("/////////////////EX5////////////");
         wc.getAllPets()
             .map(list ->{
-                float avg=0;
-                for(Pet p: list){
-                    avg+=p.getWeight();
-                }
+                //float avg=0;
+                //for(Pet p: list){
+                 //   avg+=p.getWeight();
+                //}
                 //return avg/list.size();
-            })
+                System.out.println(list);
+                return 0;
+            });
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
     }
 
     //#6 - Name of the eldest pet
