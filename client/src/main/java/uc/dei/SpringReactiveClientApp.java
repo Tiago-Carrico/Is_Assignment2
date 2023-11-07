@@ -3,6 +3,7 @@ package uc.dei;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Collector;
 
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Scheduler;
@@ -42,19 +43,20 @@ public class SpringReactiveClientApp {
         //getHeavyPetsByWeight(wc);
 
         //#5
-        //weightAverageStdDeviation(wc);
+        weightAverageStdDeviation(wc);
 
         //#6
         //eldestPet(wc);
 
         //#7
+        //avgPetsPerOwner(wc);
 
         //#8
 
         //#9
 
 
-        test(wc);
+        //test(wc);
         
     }
 
@@ -151,20 +153,44 @@ public class SpringReactiveClientApp {
 
     //#5 - Average and standard deviations of animal weights
         //-> GET of all animal weights using the size of returned query to divide the sum of weights
-    /*public static void weightAverageStdDeviation(ReactiveClientServ wc){
+    public static void weightAverageStdDeviation(ReactiveClientServ wc){
         System.out.println("/////////////////EX5////////////");
+        //Average
         wc.getAllPets()
            // .collectList()
-            .map(pet -> {
-                System.out.println(pet);
-            })
-            .subscribe(System.out::println);
+            .map(pet -> pet.getWeight())
+            .collectList()
+            .subscribe(weightList -> {
+                float avg = 0;
+                for(int i = 0; i < weightList.size(); i++){
+                    avg+=weightList.get(i);
+                }
+                avg = avg/weightList.size();
+                System.out.println("Average: " + avg);  //Average works
+
+                //Standard deviation, done here to use the average without recalculating
+                final float stdDevAvg = avg;
+                wc.getAllPets()
+                    .map(pet -> pet.getWeight())
+                    .map(weight -> weight - stdDevAvg)
+                    .map(weight-> weight * weight)
+                    .collectList()
+                    .subscribe(weightListDev -> {
+                        float avgDev = 0;
+                        for(int j = 0; j < weightListDev.size(); j++){
+                            avgDev+=weightListDev.get(j);
+                        }
+                        avgDev = avgDev/weightListDev.size();
+                        double stdDev = Math.sqrt(avgDev);
+                        System.out.println("Standard deviation: " + stdDev);    //Standard deviation is correct and works
+                    });
+            });
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e){
             e.printStackTrace();
         }
-    }*/
+    }
 
     //#6 - Name of the eldest pet
         //-> GET oldest pet, return the name
@@ -190,7 +216,19 @@ public class SpringReactiveClientApp {
     public static void avgPetsPerOwner(ReactiveClientServ wc){
         System.out.println("/////////////////EX7////////////");
         wc.getAllOwners()
+            //.map(owner -> wc.getAllPets().filter(pet -> pet.getId() == owner.getId()).count().subscribe(System.out::println))
+           /* .filter(owner -> {
+                wc.getAllPets()
+                    .filter(pet -> pet.getId() == owner.getId())
+                    .count()
+                    .subscribe();
+            })*/
             .subscribe();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
     }
 
     //#8 - All names of all the Owners and number of their respective Pets, sorted by number of pets (should not use block() if possible)
