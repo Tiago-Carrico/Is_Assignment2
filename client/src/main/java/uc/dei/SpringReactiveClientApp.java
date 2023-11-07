@@ -31,25 +31,25 @@ public class SpringReactiveClientApp {
 
         //TODO insert all the project features here after making the functions below
         //#1
-        //getOwners(wc);
+        //getOwners(wc);    //Done
 
         //#2
-        //getNumberPets(wc);
+        //getNumberPets(wc);    //Done
 
         //#3
-        //getDogs(wc);
+        //getDogs(wc);  //Done
 
         //#4
-        //getHeavyPetsByWeight(wc);
+        //getHeavyPetsByWeight(wc); //Done
 
         //#5
-        weightAverageStdDeviation(wc);
+        //weightAverageStdDeviation(wc);    //Done
 
         //#6
-        //eldestPet(wc);
+        //eldestPet(wc);    //Done
 
         //#7
-        //avgPetsPerOwner(wc);
+        avgPetsPerOwner(wc);
 
         //#8
 
@@ -59,33 +59,7 @@ public class SpringReactiveClientApp {
         //test(wc);
         
     }
-
-
-    public static void test(ReactiveClientServ wc){
-        wc.getPetsByOwner(2)
-        .subscribe(System.out::println);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e){
-            e.printStackTrace();
-        }
-    }
-
-
-    //These are for testing only, do all definite functions above
-    //Works
-    public static void getOwnerByID(ReactiveClientServ wc, long id){
-        wc.getOwner(id)
-            .subscribe(owner -> {
-                System.out.println(owner.toString());
-            });
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e){
-            e.printStackTrace();
-        }
-    }
-
+  
     //#1 - Show names and telephones of all Owners
         //-> simple GET
     public static void getOwners(ReactiveClientServ wc){
@@ -233,11 +207,38 @@ public class SpringReactiveClientApp {
 
     //#8 - All names of all the Owners and number of their respective Pets, sorted by number of pets (should not use block() if possible)
         //-> GET all owners, and cross each one with another GET of Pets with them as their owner, return the count of that query, and sort Owners by that
+        //if you can do the above one, you can probably already get the pets of each owner, and as such can probs just print owner name and number of pets returned
 
 
     //#9 - Same as #8, but instead of printing just the number of Pets, prints a list of all the Pet names. (Most work should occur on the client, aka, client does all the filtering etc.)
         //-> Same as above but also print all Pets names instead of just count
+        //If you can do the above one, instead of returning a number or something, just print all the pets lmao
 
+
+
+    //These are for testing only, do all definite functions above
+    //Works
+    public static void getOwnerByID(ReactiveClientServ wc, long id){
+        wc.getOwner(id)
+            .subscribe(owner -> {
+                System.out.println(owner.toString());
+            });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void test(ReactiveClientServ wc){
+        wc.getPetsByOwner(2)
+        .subscribe(System.out::println);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
 
 }
 
