@@ -131,10 +131,10 @@ public class SpringReactiveClientApp {
         System.out.println("/////////////////EX5////////////");
         //Average
         wc.getAllPets()
-           // .collectList()
             .map(pet -> pet.getWeight())
             .collectList()
             .subscribe(weightList -> {
+                //Average
                 float avg = 0;
                 for(int i = 0; i < weightList.size(); i++){
                     avg+=weightList.get(i);
