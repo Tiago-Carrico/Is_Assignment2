@@ -10,6 +10,7 @@ import reactor.util.retry.Retry;
 
 import uc.dei.templates.Owner;
 import uc.dei.templates.OwnerDTO;
+import uc.dei.templates.OwnerPetCount;
 import uc.dei.templates.Pet;
 import uc.dei.templates.PetDTO;
 
@@ -74,6 +75,14 @@ public class ReactiveClientServImpl implements ReactiveClientServ{
                     .bodyToFlux(Pet.class);
     }
 
+    @Override
+    public Flux<OwnerPetCount> getPetCount(){
+        return wc. get()
+            .uri("/owner/getPets")
+            .retrieve()
+            .bodyToFlux(OwnerPetCount.class);
+    }
+
 
     //test functions, put all definite ones above
     @Override
@@ -86,6 +95,7 @@ public class ReactiveClientServImpl implements ReactiveClientServ{
             .log()
             .subscribe();
     }
+
     
     
 }

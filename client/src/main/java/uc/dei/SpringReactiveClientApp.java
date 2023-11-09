@@ -19,14 +19,17 @@ import org.slf4j.Logger;
 
 import uc.dei.templates.Owner;
 import uc.dei.templates.Pet;
+import uc.dei.templates.SumAndCount;
 
 //TODO actually call all the functions the project requires, write on stuff if needed, etc.
 
 public class SpringReactiveClientApp {
     
+    static Logger logger = LoggerFactory.getLogger(SpringReactiveClientApp.class);
 
     public static void main(String[] args){
         ReactiveClientServ wc = new ReactiveClientServImpl();
+        
 
 
         //TODO insert all the project features here after making the functions below
@@ -43,18 +46,19 @@ public class SpringReactiveClientApp {
         //getHeavyPetsByWeight(wc); //Done
 
         //#5
-        //weightAverageStdDeviation(wc);    //Done
+        weightAverageStdDeviation(wc);    //Done
 
         //#6
         //eldestPet(wc);    //Done
 
         //#7
-        avgPetsPerOwner(wc);
+        //avgPetsPerOwner(wc);
 
         //#8
+        //ownersAndPetNr(wc);
 
         //#9
-
+        //ownerAndPets(wc);
 
         //test(wc);
         
@@ -69,8 +73,10 @@ public class SpringReactiveClientApp {
                 System.out.println(owner.toString());
             });
         try {
+            logger.info("All owners retrieved.");
             Thread.sleep(1000);
         } catch (InterruptedException e){
+            logger.error("Error while retrieving all owners: ", e);
             e.printStackTrace();
         }
     }
@@ -85,8 +91,10 @@ public class SpringReactiveClientApp {
             System.out.println(count);
            }); 
         try {
+            logger.info("All pets counted.");
             Thread.sleep(1000);
         } catch (InterruptedException e){
+            logger.error("Error while counting pets: ", e);
             e.printStackTrace();
         }
     }
@@ -102,8 +110,10 @@ public class SpringReactiveClientApp {
                 System.out.println(count);
             });
         try {
+            logger.info("Total number of dogs retrieved.");
             Thread.sleep(10000);
         } catch (InterruptedException e){
+            logger.error("Error while retrieving all dogs: ", e);
             e.printStackTrace();
         }
     }
@@ -119,8 +129,10 @@ public class SpringReactiveClientApp {
                 System.out.println(pet);
             });
         try {
+            logger.info("Animals heavier than 10kg retrieved.");
             Thread.sleep(1000);
         } catch (InterruptedException e){
+            logger.error("Error while retrieving animals heavier than 10kg: ", e);
             e.printStackTrace();
         }
     }
@@ -130,6 +142,30 @@ public class SpringReactiveClientApp {
     public static void weightAverageStdDeviation(ReactiveClientServ wc){
         System.out.println("/////////////////EX5////////////");
         //Average
+        wc.getAllPets()
+            .map(pet -> pet.getWeight())
+            .reduce(new SumAndCount(0,0), (acc, value)-> acc.accumulate(value))
+            .subscribe(sum -> {
+                float avg = sum.getSum()/sum.getCount();
+                System.out.println("Average= " + avg);    //works
+
+                wc.getAllPets()
+                    .map(pet -> Math.pow((pet.getWeight() - avg), 2)) //gets weight, subtracts average and turns into that value squared
+                    .collectList()
+                    .subscribe( weightList -> {
+                        float avgDev = 0;
+
+                        for(int i = 0; i < weightList.size(); i++){
+                            avgDev += weightList.get(i);
+                        }
+                        avgDev = avgDev/weightList.size();
+                        double stdDev = Math.sqrt(avgDev);
+                        System.out.println("Standard deviation = " + stdDev);
+                    });
+
+            });
+
+        /* 
         wc.getAllPets()
             .map(pet -> pet.getWeight())
             .collectList()
@@ -158,10 +194,12 @@ public class SpringReactiveClientApp {
                         double stdDev = Math.sqrt(avgDev);
                         System.out.println("Standard deviation: " + stdDev);    //Standard deviation is correct and works
                     });
-            });
+            });*/
         try {
+            logger.info("Average and standard deviation of all animals retrieved.");
             Thread.sleep(10000);
         } catch (InterruptedException e){
+            logger.error("Error while retrieving average and standard deviation: ", e);
             e.printStackTrace();
         }
     }
@@ -177,8 +215,10 @@ public class SpringReactiveClientApp {
                 System.out.println(eldest.getName());
             });
         try {
+            logger.info("Retrieved oldest pet.");
             Thread.sleep(1000);
         } catch (InterruptedException e){
+            logger.error("Error retrieving oldest pet: ", e);
             e.printStackTrace();
         }
     }
@@ -189,30 +229,79 @@ public class SpringReactiveClientApp {
         //
     public static void avgPetsPerOwner(ReactiveClientServ wc){
         System.out.println("/////////////////EX7////////////");
+
+        /*
         wc.getAllOwners()
-            //.map(owner -> wc.getAllPets().filter(pet -> pet.getId() == owner.getId()).count().subscribe(System.out::println))
-           /* .filter(owner -> {
-                wc.getAllPets()
-                    .filter(pet -> pet.getId() == owner.getId())
-                    .count()
-                    .subscribe();
-            })*/
-            .subscribe();
+            .map(owner -> wc.getPetsByOwner(owner.getId())
+                            .count()
+                            .subscribe(System.out::println))
+            //.filter(petCount -> petCount > 1)
+            .subscribe(System.out::println); */
+        wc.getPetCount()
+            .filter(owner -> owner.getPetCount() > 1)
+            .reduce(new SumAndCount(0,0), (acc, owner)-> acc.accumulate(owner.getPetCount()))
+            .subscribe(sum -> {
+                float avg = sum.getSum()/sum.getCount();
+                System.out.println(avg);    //works
+            });
         try {
+            logger.info("Retrieved average pets per owner.");
             Thread.sleep(1000);
         } catch (InterruptedException e){
+            logger.error("Error retrieving average number of pets per owner: ", e);
             e.printStackTrace();
         }
+
     }
 
     //#8 - All names of all the Owners and number of their respective Pets, sorted by number of pets (should not use block() if possible)
         //-> GET all owners, and cross each one with another GET of Pets with them as their owner, return the count of that query, and sort Owners by that
         //if you can do the above one, you can probably already get the pets of each owner, and as such can probs just print owner name and number of pets returned
-
+    public static void ownersAndPetNr(ReactiveClientServ wc){
+        System.out.println("/////////////////EX8////////////");
+        wc.getPetCount()
+            .subscribe(System.out::println);
+        try {
+            logger.info("Retrieved Owners and their pet count.");
+            Thread.sleep(1000);
+        } catch (InterruptedException e){
+            logger.error("Error retrieving owners and pet count: ", e);
+            e.printStackTrace();
+        }
+            
+    }
 
     //#9 - Same as #8, but instead of printing just the number of Pets, prints a list of all the Pet names. (Most work should occur on the client, aka, client does all the filtering etc.)
         //-> Same as above but also print all Pets names instead of just count
         //If you can do the above one, instead of returning a number or something, just print all the pets lmao
+
+    public static void ownerAndPets(ReactiveClientServ wc){
+        System.out.println("/////////////////EX9////////////");
+        wc.getAllOwners()
+            .concatMap(owner -> {
+                System.out.println("\nOwner name: " + owner.getName());
+                return wc.getPetsByOwner(owner.getId())
+                            .doOnNext(pet -> System.out.println(pet.getName()));
+            })
+            .subscribe();
+        try {
+            logger.info("Retrieved Owners and their pet count.");
+            Thread.sleep(1000);
+        } catch (InterruptedException e){
+            logger.error("Error retrieving owners and pet count: ", e);
+            e.printStackTrace();
+        }
+    }
+
+    /*
+        wc.getAllOwners()
+            .subscribe(owner -> {
+                System.out.println(owner);
+                wc.getPetsByOwner(owner.getId())
+                .subscribe(pet -> {
+                    System.out.println(pet);
+                });
+            });*/
 
 
 

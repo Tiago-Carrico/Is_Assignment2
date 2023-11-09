@@ -8,6 +8,8 @@ import reactor.core.publisher.Mono;
 import uc.dei.entity.Pet;
 import uc.dei.repository.PetRepository;
 
+import uc.dei.entity.OwnerPetCount;
+
 @Service
 public class PetService {
     
@@ -36,5 +38,9 @@ public class PetService {
 
     public Flux<Pet> getPetByOwnerId(long id){
         return petRep.findByOwnerId(id);
+    }
+
+    public Flux<OwnerPetCount> getPetCount(){
+        return petRep.getPetCount();
     }
 }

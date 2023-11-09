@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import uc.dei.entity.Owner;
+import uc.dei.entity.OwnerPetCount;
 import uc.dei.service.OwnerService;
 import uc.dei.entity.Pet;
 import uc.dei.service.PetService;
+import uc.dei.entity.OwnerPetCount;
 
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
@@ -67,6 +69,12 @@ public class RESTController {
     public Flux<Pet> getPetByOwner(@PathVariable("id") Long id){
         logger.info("Request type: GET\nRequest URI: /api/pet/ownerId/" + id + "]");
         return petService.getPetByOwnerId(id);
+    }
+
+    @GetMapping("/owner/getPets")
+    public Flux<OwnerPetCount> getPetCount(){
+        logger.info("Request type: GET\nRequest URI: /api/owner/getPets");
+        return petService.getPetCount();
     }
 
 

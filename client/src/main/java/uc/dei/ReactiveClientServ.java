@@ -4,6 +4,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import uc.dei.templates.Owner;
+import uc.dei.templates.OwnerPetCount;
 import uc.dei.templates.Pet;
 
 //TODO just declare the functions and do Imports, actual code is in ReactiveClientServImpl
@@ -16,6 +17,8 @@ public interface ReactiveClientServ {
 
     //for getting pets by owner
     public Flux<Pet> getPetsByOwner(long id);
+
+    public Flux<OwnerPetCount> getPetCount();
 
 
     //For testing and such, for definite functions make them above
