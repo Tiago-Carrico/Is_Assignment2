@@ -1,0 +1,2 @@
+Average weight: 12.995556
+Standard deviation: 7.600910844932167

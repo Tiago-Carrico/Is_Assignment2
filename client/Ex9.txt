@@ -1,0 +1,48 @@
+
+Owner name: anibal
+name: bobby
+species: dog
+birth date: 2020-12-01
+weight: 20.05kg
+
+Owner name: tiago
+name: banksy
+species: cat
+birth date: 2019-03-21
+weight: 6.55kg
+
+name: bichano
+species: bird
+birth date: 2018-04-12
+weight: 15.43kg
+
+name: toto
+species: dog
+birth date: 2018-04-12
+weight: 25.43kg
+
+Owner name: joao
+name: lol
+species: dog
+birth date: 2017-10-20
+weight: 20.0kg
+
+name: thor
+species: cat
+birth date: 2020-10-20
+weight: 15.0kg
+
+name: layla
+species: lizard
+birth date: 2020-10-23
+weight: 2.0kg
+
+name: nuno
+species: bird
+birth date: 2023-10-23
+weight: 5.0kg
+
+name: pantufa
+species: dog
+birth date: 2016-10-23
+weight: 7.5kg

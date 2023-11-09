@@ -1,0 +1,25 @@
+
+name: thor
+species: cat
+birth date: 2020-10-20
+weight: 15.0kg
+
+name: bichano
+species: bird
+birth date: 2018-04-12
+weight: 15.43kg
+
+name: lol
+species: dog
+birth date: 2017-10-20
+weight: 20.0kg
+
+name: bobby
+species: dog
+birth date: 2020-12-01
+weight: 20.05kg
+
+name: toto
+species: dog
+birth date: 2018-04-12
+weight: 25.43kg
