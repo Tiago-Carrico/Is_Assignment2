@@ -3,6 +3,7 @@ package uc.dei;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.Semaphore;
 import java.util.stream.Collector;
 
 import reactor.core.publisher.Flux;
@@ -27,39 +28,43 @@ public class SpringReactiveClientApp {
     
     static Logger logger = LoggerFactory.getLogger(SpringReactiveClientApp.class);
 
-    public static void main(String[] args){
+    private static Semaphore semaphore = new Semaphore(9);
+
+    public static void main(String[] args) throws InterruptedException{
         ReactiveClientServ wc = new ReactiveClientServImpl();
         
 
 
         //TODO insert all the project features here after making the functions below
         //#1
-        //getOwners(wc);    //Done
+        getOwners(wc);    //Done
 
         //#2
-        //getNumberPets(wc);    //Done
+        getNumberPets(wc);    //Done
 
         //#3
-        //getDogs(wc);  //Done
+        getDogs(wc);  //Done
 
         //#4
-        //getHeavyPetsByWeight(wc); //Done
+        getHeavyPetsByWeight(wc); //Done
 
         //#5
         weightAverageStdDeviation(wc);    //Done
 
         //#6
-        //eldestPet(wc);    //Done
+        eldestPet(wc);    //Done
 
         //#7
-        //avgPetsPerOwner(wc);
+        avgPetsPerOwner(wc);
 
         //#8
-        //ownersAndPetNr(wc);
+        ownersAndPetNr(wc);
 
         //#9
-        //ownerAndPets(wc);
+        ownerAndPets(wc);
 
+
+        //semaphore.acquire(9);
         //test(wc);
         
     }
@@ -71,14 +76,11 @@ public class SpringReactiveClientApp {
         wc.getAllOwners()
             .subscribe(owner -> {
                 System.out.println(owner.toString());
-            });
-        try {
-            logger.info("All owners retrieved.");
-            Thread.sleep(1000);
-        } catch (InterruptedException e){
-            logger.error("Error while retrieving all owners: ", e);
-            e.printStackTrace();
-        }
+            }, err -> {
+                logger.error("Error while retrieving all owners: ", err);
+                
+            }, () -> {logger.info("All owners retrieved.");
+                semaphore.release(1);});
     }
 
     //#2 - number of Pets
@@ -89,14 +91,10 @@ public class SpringReactiveClientApp {
            .count()
            .subscribe(count->{
             System.out.println(count);
-           }); 
-        try {
-            logger.info("All pets counted.");
-            Thread.sleep(1000);
-        } catch (InterruptedException e){
-            logger.error("Error while counting pets: ", e);
-            e.printStackTrace();
-        }
+           }, err -> {
+            logger.error("Error while counting pets: ", err);
+           }, () -> {logger.info("All pets counted.");
+            semaphore.release(1);}); 
     }
 
     //#3 - Total number of dogs
