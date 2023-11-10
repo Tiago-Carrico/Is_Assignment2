@@ -13,6 +13,6 @@ public interface PetRepository extends R2dbcRepository<Pet, Long>{
     //@Query("SELECT * FROM pet;")
     public Flux<Pet> findByOwnerId(long id);
 
-    @Query("SELECT owner.id, owner.name, COUNT(pet.id) AS pet_count FROM owner LEFT JOIN pet ON owner.id = pet.owner_id GROUP BY owner.id, owner.name;")
+    @Query("SELECT owner.id, owner.name, COUNT(pet.id) AS pet_count FROM owner LEFT JOIN pet ON owner.id = pet.owner_id GROUP BY owner.id, owner.name ORDER BY pet_count DESC;")
     public Flux<OwnerPetCount> getPetCount();
 }

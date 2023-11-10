@@ -88,7 +88,6 @@ public class SpringReactiveClientApp {
         }
 
         semaphore.acquire(9);
-        //test(wc);
         
     }
   
@@ -226,43 +225,8 @@ public class SpringReactiveClientApp {
             }, err -> {
                 logger.error("Error while retrieving average and standard deviation.");
             }, () -> {logger.info("Average and standard deviation of all animal weights retrieved.");
-                /*try {
-                    writer.close();
-                    } catch (IOException e) {
-                    e.printStackTrace();
-                }*/
                 semaphore.release(1);});
 
-        /* 
-        wc.getAllPets()
-            .map(pet -> pet.getWeight())
-            .collectList()
-            .subscribe(weightList -> {
-                //Average
-                float avg = 0;
-                for(int i = 0; i < weightList.size(); i++){
-                    avg+=weightList.get(i);
-                }
-                avg = avg/weightList.size();
-                System.out.println("Average: " + avg);  //Average works
-
-                //Standard deviation, done here to use the average without recalculating
-                final float stdDevAvg = avg;
-                wc.getAllPets()
-                    .map(pet -> pet.getWeight())
-                    .map(weight -> weight - stdDevAvg)
-                    .map(weight-> weight * weight)
-                    .collectList()
-                    .subscribe(weightListDev -> {
-                        float avgDev = 0;
-                        for(int j = 0; j < weightListDev.size(); j++){
-                            avgDev+=weightListDev.get(j);
-                        }
-                        avgDev = avgDev/weightListDev.size();
-                        double stdDev = Math.sqrt(avgDev);
-                        System.out.println("Standard deviation: " + stdDev);    //Standard deviation is correct and works
-                    });
-            });*/
     }
 
     //#6 - Name of the eldest pet
@@ -384,18 +348,6 @@ public class SpringReactiveClientApp {
             });
     }
 
-    /*
-        wc.getAllOwners()
-            .subscribe(owner -> {
-                System.out.println(owner);
-                wc.getPetsByOwner(owner.getId())
-                .subscribe(pet -> {
-                    System.out.println(pet);
-                });
-            });*/
-
-
-
     //These are for testing only, do all definite functions above
     //Works
     public static void getOwnerByID(ReactiveClientServ wc, long id){
@@ -421,31 +373,3 @@ public class SpringReactiveClientApp {
     }
 
 }
-
-
-//The request that worked in the class is here
-
-//addOwner(wc);
-        //WebClient wc = WebClient.create("http://localhost:8080/api");
-
-        /*
-        System.out.println("before");
-        Mono<String> response = wc.get()
-                                    .uri("/getOwner")
-                                    .accept(MediaType.APPLICATION_JSON)
-                                    .retrieve()
-                                    .bodyToMono(String.class)
-                                    .log();
-                                    
-        response.subscribe(result -> {
-            System.out.println("Response: " + result);
-        });
-        
-        try{
-            Thread.sleep(10000);
-        }catch (InterruptedException e) {
-            e.printStackTrace();
-        };
-        
-
-        System.out.println("after");*/

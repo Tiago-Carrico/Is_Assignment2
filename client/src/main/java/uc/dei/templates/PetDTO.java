@@ -12,12 +12,12 @@ public class PetDTO {
 
     public PetDTO(){}
 
-    public void PetDTO(String name, String species, LocalDate birthDate, float weight, Long ownerId){
-        this.name = name;
-        this.species = species;
-        this.birthDate = birthDate;
-        this.weight = weight;
-        this.ownerId = ownerId;
+    public PetDTO(Pet pet){
+        this.name = pet.getName();
+        this.species = pet.getSpecies();
+        this.birthDate = pet.getBirthDate();
+        this.weight = pet.getWeight();
+        this.ownerId = pet.getOwnerId();
     }
 
 	public String getName() {

@@ -21,7 +21,7 @@ public interface ReactiveClientServ {
     public Flux<OwnerPetCount> getPetCount();
 
 
-    //For testing and such, for definite functions make them above
     public void postOwner(Owner owner);
+    public void postPet(Pet pet);
 
 }

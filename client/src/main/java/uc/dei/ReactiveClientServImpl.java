@@ -84,7 +84,6 @@ public class ReactiveClientServImpl implements ReactiveClientServ{
     }
 
 
-    //test functions, put all definite ones above
     @Override
     public void postOwner(Owner owner){
         wc.post()
@@ -96,6 +95,16 @@ public class ReactiveClientServImpl implements ReactiveClientServ{
             .subscribe();
     }
 
+    @Override
+    public void postPet(Pet pet){
+        wc.post()
+            .uri("/pet")
+            .body(Mono.just(new PetDTO(pet)), PetDTO.class)
+            .retrieve()
+            .bodyToMono(String.class)
+            .log()
+            .subscribe();
+    }
     
     
 }

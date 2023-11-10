@@ -78,6 +78,21 @@ public class RESTController {
     }
 
 
+    @PostMapping("/owner"/*, consumes = {MediaType.APPLICATION_JSON_VALUE}*/)
+    public Mono<Owner> addOwner(@RequestBody Owner owner){
+        System.out.println("it shows something here?");
+        logger.info("Request: POST | /api/owner");
+        return ownerService.saveOwner(owner);
+    }
+
+    @PostMapping("/pet"/*, consumes = {MediaType.APPLICATION_JSON_VALUE}*/)
+    public Mono<Pet> addPet(@RequestBody Pet pet){
+        System.out.println("it shows something here?");
+        logger.info("Request: POST | /api/pet");
+        return petService.savePet(pet);
+    }
+
+
 
     //Test functions
     @GetMapping("/getOwner")
@@ -86,17 +101,5 @@ public class RESTController {
         logger.info("Request: GET | /api/owner/1");
         return ownerService.getOwnerById((long) 1);
     }
-
-
-
-
-    //Test
-    @PostMapping("/owner"/*, consumes = {MediaType.APPLICATION_JSON_VALUE}*/)
-    public Mono<Owner> addOwner(@RequestBody Owner owner){
-        System.out.println("it shows something here?");
-        logger.info("Request: POST | /api/owner");
-        return ownerService.saveOwner(owner);
-    }
-    
     
 }

@@ -1,6 +1,7 @@
 /workspace/src/main/java/uc/dei/repository/PetRepository.java
 /workspace/src/main/java/uc/dei/controller/RESTController.java
 /workspace/src/main/java/uc/dei/ServerApplication.java
+/workspace/src/main/java/uc/dei/entity/OwnerPetCount.java
 /workspace/src/main/java/uc/dei/service/PetService.java
 /workspace/src/main/java/uc/dei/entity/Pet.java
 /workspace/src/main/java/uc/dei/service/OwnerService.java
